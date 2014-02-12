@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>html2pdf that doesn't suck</title>
+	<title>HTML2PDF</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Html2pdf that doesn't suck">
-	<meta name="author" content="Allan Ebdrup">
+	<meta name="description" content="HTML2PDF">
+	<meta name="author" content="Immensa">
 
 	<!-- Le styles -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -218,11 +218,11 @@
 	var html2pdf = {
 		header: {
 			height: "1cm",
-			contents: '<div class="center">page {{pageNumber}} of {{totalPages}}</div>'
+			contents: '<div class="center">página {{pageNumber}} de {{totalPages}}</div>'
 		},
 		footer: {
 			height: "1cm",
-			contents: '<div class="center">page {{pageNumber}} of {{totalPages}}</div>'
+			contents: '<div class="center">página {{pageNumber}} de {{totalPages}}</div>'
 		}
 	};
 	jQuery && jQuery(function ($) {
@@ -260,20 +260,6 @@
 		});
 		$('#optionsButton').removeClass("hidden");
 	});
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-11089671-7']);
-	_gaq.push(['_setDomainName', 'html2pdf.it']);
-	_gaq.push(['_trackPageview']);
-	if (document.location.href.indexOf("html2pdf.it") !== -1) {
-		(function () {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
-	}
 </script>
 </body>
 </html>
