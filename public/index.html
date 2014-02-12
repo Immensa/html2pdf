@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>html2pdf that doesn't suck</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Html2pdf that doesn't suck">
+	<meta name="author" content="Allan Ebdrup">
+
+	<!-- Le styles -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		body {
+			padding-top: 20px;
+			padding-bottom: 40px;
+		}
+
+		#optionsButton {
+			margin-right: 37px;
+			margin-left: -110px;
+			margin-top: -25px;
+			float: right;
+		}
+
+		#pdfInput {
+			margin-bottom: 8px;
+		}
+		.options {
+			-webkit-transform: scale(0.6);
+			-moz-transform: scale(0.6);
+			-ms-transform: scale(0.6);
+			-o-transform: scale(0.6);
+			transform: scale(0.6);
+		}
+
+		.options .btn-group:first-child {
+			margin-right: 19px;
+		}
+
+		.options .btn-group:last-child {
+			margin-left: 19px;
+		}
+
+		.container-narrow {
+			margin: 0 auto;
+			max-width: 700px;
+		}
+
+		.container-narrow > hr {
+			margin: 30px 0;
+		}
+
+			/* Main marketing message and sign up button */
+		.jumbotron {
+			margin: 60px 0;
+			text-align: center;
+		}
+
+		.jumbotron h1 {
+			line-height: 1;
+			padding-bottom: 40px;
+		}
+
+		.jumbotron .input, .center {
+			text-align: center;
+		}
+
+		.jumbotron .lead {
+			margin-top: 21px;
+		}
+
+		@media (min-width: 500px) {
+			.jumbotron h1 {
+				font-size: 50px;
+			}
+
+			#pdfForm {
+				-webkit-transform: scale(1.2);
+				-moz-transform: scale(1.2);
+				-ms-transform: scale(1.2);
+				-o-transform: scale(1.2);
+				transform: scale(1.2);
+			}
+		}
+
+		@media (min-width: 700px) {
+			.jumbotron h1 {
+				font-size: 72px;
+			}
+
+			#pdfForm {
+				-webkit-transform: scale(1.5);
+				-moz-transform: scale(1.5);
+				-ms-transform: scale(1.5);
+				-o-transform: scale(1.5);
+				transform: scale(1.5);
+			}
+		}
+
+		.contents {
+			margin: 0 30px;
+		}
+
+		.fb-like {
+			width: 52px !important;
+			margin: 0 26px 0 0;
+			padding: 0;
+			position: relative;
+			display: inline-block;
+			top: -3px;
+		}
+	</style>
+	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="/js/html5shiv.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+<div class="container-narrow">
+
+	<div class="masthead">
+		<h3 class="muted">html2pdf.it - HTML5, CSS3 and JavaScript supported.</h3>
+	</div>
+
+	<hr>
+
+	<div class="jumbotron">
+		<h1>Web pages as PDF</h1>
+
+		<div id="fb-root"></div>
+		<script>
+			var loadSocial = document.location.href.indexOf("html2pdf.it") !== -1;
+			if (loadSocial) {
+				(function (d, s, id) {
+
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s);
+					js.id = id;
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=253053011377188";
+					fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+			}
+		</script>
+		<iframe id="downloadFrame" style="display:none"></iframe>
+		<form id="pdfForm" class="form-inline" method="GET" action="/">
+			<div id="pdfInput" class="input-prepend input-append">
+				<span class="add-on">Web page</span>
+				<input id="url" name="url" type="text" class="input-large input" placeholder="URL"
+				       value="www.html2pdf.it">
+				<button type="submit" class="btn" id="getPdfButton">Get PDF now!</button>
+			</div>
+			<div id="options" class="options" style="display:none">
+				<div class="btn-group" data-toggle-name="format" data-toggle="buttons-radio">
+					<button type="button" disabled class="btn">format</button>
+					<button type="button" value="A3" class="btn" data-toggle="button">A3</button>
+					<button type="button" value="A4" class="btn" data-toggle="button">A4</button>
+					<button type="button" value="A5" class="btn" data-toggle="button">A5</button>
+					<button type="button" value="Legal" class="btn" data-toggle="button">Legal</button>
+					<button type="button" value="Letter" class="btn" data-toggle="button">Letter</button>
+					<button type="button" value="Tabloid" class="btn" data-toggle="button">Tabloid</button>
+				</div>
+				<div class="btn-group" data-toggle-name="orientation" data-toggle="buttons-radio">
+					<button type="button" disabled class="btn">orientation</button>
+					<button type="button" value="portrait" class="btn" data-toggle="button">portrait</button>
+					<button type="button" value="landscape" class="btn" data-toggle="button">landscape</button>
+				</div>
+			</div>
+			<div id="options2" class="options" style="display:none">
+				<div class="btn-group" data-toggle-name="download" data-toggle="buttons-radio">
+					<button type="button" disabled class="btn">open</button>
+					<button type="button" value="false" class="btn" data-toggle="button">show in browser</button>
+					<button type="button" value="true" class="btn" data-toggle="button">download as file</button>
+				</div>
+			</div>
+			<input id="doDownload" type="hidden" name="download" value="false"/>
+			<input type="hidden" name="format" value="A4"/>
+			<input type="hidden" name="downloadToken" id="downloadToken"/>
+			<input type="hidden" name="orientation" value="portrait"/>
+		</form>
+		<button id="optionsButton" type="button" class="hidden btn btn-link">options</button>
+		<p class="lead">The pdf will be made as when you print a web page to a printer. Some web pages have not been
+			optimized for printing and will not look pretty</code></p>
+
+	</div>
+
+	<hr>
+
+</div>
+<!-- /container -->
+
+<div class="contents">
+	<div class="row-fluid">
+		<div class="span3">
+			<h4>Renders FULL HTML5 and CSS3</h4>
+
+			<p>HTML and CSS is interpreted by the WebKit rendering engine, also used in Chrome, Safari and Opera.</p>
+		</div>
+		<div class="span3">
+			<h4>Runs JavaScript on the page</h4>
+
+			<p>JavaScript on the page is run as if in a browser.</p>
+		</div>
+		<div class="span3">
+			<h4>Open source</h4>
+
+			<p>html2pdf.it is open source, <a href="https://github.com/Muscula/html2pdf.it">take a look at the code</a>.
+				Fork it and run your own html2pdf.it server.</p>
+
+		</div>
+		<div class="span3">
+			<h4>Build with node.js</h4>
+
+			<p>The technology used is node.js. It runs on both Ubuntu, Mac and Windows</p>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+			<h4>Headers & footers</h4>
+
+			<p>You add headers and footers to the PDF by inserting a script in the HTML of the web page. Below is an
+				example with page numbers in footer and header (You have to own the web page and modify it).
+				<pre class="code" style="max-width: 620px;">
+&lt;script type="text/javascript"&gt;
+//setting up headers and footers for html2pdf
+var html2pdf = {
+ header: {
+  height: "1cm",
+  contents: '&lt;div class="center"&gt;page {{pageNumber}} of {{totalPages}}&lt;/div&gt;'
+ },
+ footer: {
+  height: "1cm",
+  contents: '&lt;div class="center"&gt;page {{pageNumber}} of {{totalPages}}&lt;/div&gt;'
+  }
+ }
+};
+&lt;/script&gt;</pre>
+			<code>{{pageNumber}}</code> will be replaced with <code>1</code> on page 1, <code>2</code> on page 2 and
+			so on. <code>{{totalPages}}</code> will be replaced by the total count of pages in the PDF.
+			</p>
+		</div>
+		<div class="span3">
+			<h4>Nothing to install</h4>
+
+			<p>If you do not want to install and run your own servers, you are welcome to use html2pdf.it directly:
+				<code>www.html2pdf.it/?url=[url]</code>.
+			</p>
+
+			<p>If the traffic ramps up to cost me a lot of money, this may turn into a paid service, or require
+				donations. Running your own server will always be free.
+			</p>
+		</div>
+		<div class="span3">
+			<h4>Use it in your web application</h4>
+
+			<p>A good use for html2pdf.it is to use it as a service in your own web application, phone app etc. Turn
+				HTML invoices into PDFs etc.
+			</p>
+
+			<h4>Contact?</h4>
+
+			<p>Drop me an email at <a href="mailto:allan@878.dk">allan@878.dk</a>
+			</p>
+		</div>
+	</div>
+
+
+	<hr>
+	<div>
+
+
+		<div class="">
+			<div class="fb-like" data-href="http://www.facebook.com/html2pdf.it" data-send='false'
+			     data-layout='button_count' data-width='52' data-show-faces='false'></div>
+			<a href="https://twitter.com/html2pdfit" class="twitter-follow-button" data-show-count="false"
+			   data-size="large">Follow @html2pdfit</a>
+			<script>
+				if (loadSocial) {
+					!function (d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+						if (!d.getElementById(id)) {
+							js = d.createElement(s);
+							js.id = id;
+							js.src = p + '://platform.twitter.com/widgets.js';
+							fjs.parentNode.insertBefore(js, fjs);
+						}
+					}(document, 'script', 'twitter-wjs');
+				}
+			</script>
+		</div>
+	</div>
+
+	<a href="https://github.com/Muscula/html2pdf.it"><img style="position: absolute; top: 0; left: 0; border: 0;"
+	                                                      src="/img/forkme_left_red_aa0000.png"
+	                                                      alt="Fork me on GitHub"></a>
+
+	<footer class="footer">
+		<p>html2pdf.it by <a href="http://dk.linkedin.com/in/ebdrup">Allan Ebdrup</a>, based on <a
+				href="http://phantomjs.org">PhantomJS</a></p>
+	</footer>
+</div>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="/js/spin.min.js"></script>
+<script type="text/javascript" src="/js/spinOnDownload.js"></script>
+<script type="text/javascript">
+	var html2pdf = {
+		header: {
+			height: "1cm",
+			contents: '<div class="center">page {{pageNumber}} of {{totalPages}}</div>'
+		},
+		footer: {
+			height: "1cm",
+			contents: '<div class="center">page {{pageNumber}} of {{totalPages}}</div>'
+		}
+	};
+	jQuery && jQuery(function ($) {
+		$("#url").val(document.location.href.replace("http://", "").replace("https://", "").replace(/\/$/, ""));
+		$("#url").select();
+		$('div.btn-group').each(function () {
+			var group = $(this);
+			var form = group.parents('form').eq(0);
+			var name = group.attr('data-toggle-name');
+			var hidden = $('input[name="' + name + '"]', form);
+			$('button', group).each(function () {
+				var button = $(this);
+				button.on('click', function () {
+					hidden.val($(this).val());
+					$('button', group).each(function () {
+						var button = $(this);
+						if (button.val() === hidden.val()) {
+							button.addClass('active');
+						} else {
+							button.removeClass('active');
+						}
+					});
+				});
+				if (button.val() === hidden.val()) {
+					button.addClass('active');
+				}
+			});
+		});
+		$('#optionsButton').on("click", function () {
+			$("#optionsButton").hide(200, function () {
+				$('#options').show(200);
+				$('#options2').show(200);
+			});
+
+		});
+		$('#optionsButton').removeClass("hidden");
+	});
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-11089671-7']);
+	_gaq.push(['_setDomainName', 'html2pdf.it']);
+	_gaq.push(['_trackPageview']);
+	if (document.location.href.indexOf("html2pdf.it") !== -1) {
+		(function () {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	}
+</script>
+</body>
+</html>
