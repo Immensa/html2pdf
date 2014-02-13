@@ -1,48 +1,40 @@
 html2pdf.it
 ===========
-Using PhantomJS to generate pdfs, via a webservice. Runs using node.js.
+Usando o PhantomJS para gerar pdfs, via webservice. Executando com o node.js.
 
-See it in action at: [html2pdf.it](http://www.html2pdf.it).
+Veja em ação: [html2pdf.immensa.com.br](http://html2pdf.immensa.com.br/).
 
-Ready to fork and push to heroku (where I run it).
+Trabalha no Windows e Ubuntu.
 
-Works out of the box on both windows and ubuntu.
-
-On Mac you need to
+No Mac vc precisa instalar:
 ```
 brew install phantomjs
 ```
 
-To get started you need to clone the repository, cd to it and run
+Para começar, você precisa clonar o repositório, entrar nele e executar
 -----------
 ```
 npm install
 ```
 
-Running webserver
+Rode o webserver
 -----------
 ```
 node lib/app.js
 ```
 
-If you want to host html2pdf.it yourself, you will have to ask your host if they support hosting Node.js applications.
-Node.js is still new, so a lot of hosts don't support it. 
-
-If your host does not support Node.js. You need to find a new host
-that does. Heroku.com or nodejitsu.com for example.
-
-Running tests
+Rode os testes
 -----------
 ```
 npm test
 ```
 
-Node modules used
+Modulos usados no Node.js
 ----------------
-- Routing etc. is done with `express`
-- Testing is done with `mocha`, `chai` and `sinon`, using BDD style tests.
-- JSHint is run on the JavaScript code
+- Rotas, etc. é feito com `express`
+- Testes é feito com `mocha`, `chai` e `sinon`, testes ao estilo BDD.
+- JSHint é executado no código JavaScript
 
-Node version
+Versão do Node.js
 ------------
-Version 0.10+ of node.js is required (Domains are used for catching errors, and domains where not really stable before 0.10)
+É necessária a versão 0.10+ do Node.js(Porque vc ja sabe, pode ocorrer erros em uma versão anterior)
