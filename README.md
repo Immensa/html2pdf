@@ -1,5 +1,5 @@
-html2pdf.it
-===========
+html2pdf
+========
 Usando o PhantomJS para gerar pdfs, via webservice. Executando com o node.js.
 
 Veja em ação: [html2pdf.immensa.com.br](http://html2pdf.immensa.com.br/).
