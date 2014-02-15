@@ -13,14 +13,17 @@ Exemplos:
 
 [TEMPLATE 4](http://html2pdf.immensa.com.br/?url=http://gallery.campaignmonitor.com/ViewEmail/i/A306E52084664A72/)
 
+AJUDANDO COM O CODIGO
+=====================
+
 Trabalha no Windows e Ubuntu.
 
-No Mac vc precisa instalar:
+Mas no Mac vc precisa instalar:
 ```
 brew install phantomjs
 ```
 
-Para começar, você precisa clonar o repositório, entrar nele e executar
+Vamos lá, clone o repositório, entre nele e execute
 -----------
 ```
 npm install
